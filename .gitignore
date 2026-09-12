@@ -1,0 +1,14 @@
+# Bin contents are your live data (and may contain secrets) - never commit them.
+bins.json
+*.bins.json
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# OS cruft
+.DS_Store
+Thumbs.db

@@ -1,0 +1,23 @@
+# Run the clipbin server with Docker Compose:   docker compose up -d
+# Deploy it to a Docker Swarm:                   docker stack deploy -c docker-compose.yml clipbin
+#
+# IMPORTANT: the server keeps bins in memory (persisted to a file). Keep it to a
+# SINGLE replica - multiple replicas would each hold a different set of bins and
+# a load balancer would bounce you between them. This is a small LAN utility, not
+# a horizontally-scaled service, so one instance is the right answer.
+services:
+  clipbin:
+    build: .
+    image: clipbin:latest
+    ports:
+      - "8000:8000"
+    volumes:
+      - clipbin-data:/data
+    restart: unless-stopped          # honored by `docker compose`
+    deploy:                          # honored by `docker stack deploy` (Swarm)
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+volumes:
+  clipbin-data:

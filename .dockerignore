@@ -1,0 +1,10 @@
+.git
+.gitignore
+__pycache__/
+*.pyc
+bins.json
+*.md
+run.*
+Dockerfile
+docker-compose.yml
+LICENSE
